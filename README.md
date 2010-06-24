@@ -12,7 +12,7 @@ placement defaults, for example:
 	  @(Ann2 @field) // Goes to the field *only*
 	  var prop1 = 0
 	
-		@(BeanProperty @beanSetter) // Per-property default, overrided the class one
+	  @(BeanProperty @beanSetter) // Per-property default
 	  @Ann1 // Goes to the bean setter *only*
 	  @(Ann2 @getter) // Goes to the getter *only*
 	  var prop2 = 0
@@ -28,7 +28,7 @@ Usage
 With the [maven-scala-plugin](http://scala-tools.org/mvnsites/maven-scala-plugin):
 	<plugin>
 	  <groupId>org.scala-tools</groupId>
-		<artifactId>maven-scala-plugin</artifactId>
+	  <artifactId>maven-scala-plugin</artifactId>
 	  ...
 	  <configuration>
 	    ...
@@ -40,6 +40,7 @@ With the [maven-scala-plugin](http://scala-tools.org/mvnsites/maven-scala-plugin
 	        <version>0.1.0-SNAPSHOT</version>
 	      </compilerPlugin>
 	    </compilerPlugins>
+	  </configuration>
 Manual:
 	$ scalac -Xplugin:<PATH-TO-THE-JAR-FILE> <YOUR-OPTIONS>
 
