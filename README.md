@@ -1,10 +1,10 @@
 Beans plugin for the Scala compiler
 ===================================
-Scala 2.8 allows us to control annotation placement for properties by
-marking them with special annotations from the scala.annotation.target
-package. But the way you are supposed to do it is rather explicit and
-verbose. This plugin allows you to define per-class and per-property
-placement defaults, for example:
+Scala 2.8 makes in possible to control annotation placement by marking
+them with special annotations from the `scala.annotation.target` package.
+But the way you are supposed to do it is rather explicit and verbose.
+This plugin allows one to define per-class and per-property placement
+defaults, for example:
 	@(BeanProperty @getter @beanGetter) // Per-class default
 	class MyBean {
 	  @BeanProperty // Inheriting the class default
