@@ -37,7 +37,7 @@ With the [maven-scala-plugin](http://scala-tools.org/mvnsites/maven-scala-plugin
 	      <compilerPlugin>
 	        <groupId>com.github.mvv.beans-scalac-plugin</groupId>
 	        <artifactId>beans-scalac-plugin</artifactId>
-	        <version>0.1.0-SNAPSHOT</version>
+	        <version>0.1.0</version>
 	      </compilerPlugin>
 	    </compilerPlugins>
 	  </configuration>
