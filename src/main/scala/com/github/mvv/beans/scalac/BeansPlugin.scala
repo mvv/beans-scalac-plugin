@@ -36,6 +36,11 @@ class BeansPlugin(val global: Global) extends Plugin {
 
     import global._
 
+    private val rootTermName = newTermName("_root_")
+    private val scalaTermName = newTermName("scala")
+    private val annotationTermName = newTermName("annotation")
+    private val targetTermName = newTermName("target")
+
     protected def newTransformer(unit: CompilationUnit) = new Transformer {
       override def transform(tree: Tree): Tree = tree match {
         case ClassDef(clsMods, clsName, tparams, impl) => atOwner(tree.symbol) {
@@ -73,11 +78,11 @@ class BeansPlugin(val global: Global) extends Plugin {
                                             treeCopy.Select(stree,
                                               treeCopy.Select(stree,
                                                 treeCopy.Ident(stree,
-                                                  newTermName("_root_")),
-                                                newTermName("scala")),
-                                              newTermName("annotation")),
-                                            newTermName("target")),
-                                          newTypeName(target.toString))),
+                                                  rootTermName),
+                                                scalaTermName),
+                                              annotationTermName),
+                                            targetTermName),
+                                          target.toTypeName)),
                                       nme.CONSTRUCTOR), Nil), annotateWith(ts))
                             }
                             annotateWith(targets)
