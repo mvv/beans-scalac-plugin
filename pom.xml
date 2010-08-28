@@ -20,14 +20,7 @@
   <repositories>
     <repository>
       <id>scala-tools-releases</id>
-      <url>http://scala-tools.org/repo-releases</url>
-    </repository>
-    <repository>
-      <id>scala-tools-snapshots</id>
-      <url>http://scala-tools.org/repo-snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
+      <url>http://nexus.scala-tools.org/content/repositories/releases</url>
     </repository>
   </repositories>
   <dependencies>
