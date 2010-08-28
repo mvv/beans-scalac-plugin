@@ -19,10 +19,7 @@ package com.github.mvv.beans.scalac.test
 import javax.annotation._
 import scala.annotation.target._
 import scala.reflect.BeanProperty
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.scalatest.Spec
-import org.scalatest.matchers.ShouldMatchers
+import org.specs._
 
 class SimpleTestBean {
   @(BeanProperty @getter)
@@ -52,35 +49,32 @@ class ClassTestBean {
   var test2 = 0
 }
 
-@RunWith(classOf[JUnitRunner])
-class Tests extends Spec with ShouldMatchers {
-  def testIt = execute()
-
+class Tests extends SpecificationWithJUnit {
   val simpleField = classOf[SimpleTestBean].getDeclaredField("test")
   val simpleGetter = classOf[SimpleTestBean].getMethod("test")
   val simpleBeanSetter = classOf[SimpleTestBean].getMethod("setTest", classOf[Int])
 
-  it("Property defaults should be respected") {
-    simpleGetter.getAnnotation(classOf[PostConstruct]) should not be (null)
-    simpleGetter.getAnnotation(classOf[Resource]) should not be (null)
-    simpleGetter.getAnnotation(classOf[Resource]).name should be ("test")
-    simpleField.getAnnotation(classOf[PostConstruct]) should be (null)
-    simpleField.getAnnotation(classOf[Resource]) should be (null)
+  "Property defaults should be respected" in {
+    simpleGetter.getAnnotation(classOf[PostConstruct]) must not be (null)
+    simpleGetter.getAnnotation(classOf[Resource]) must not be (null)
+    simpleGetter.getAnnotation(classOf[Resource]).name must_== "test"
+    simpleField.getAnnotation(classOf[PostConstruct]) must be (null)
+    simpleField.getAnnotation(classOf[Resource]) must be (null)
   }
 
-  it("Annotation overrides should take priority over proprety defaults") {
-    simpleBeanSetter.getAnnotation(classOf[PreDestroy]) should not be (null)
-    simpleGetter.getAnnotation(classOf[PreDestroy]) should be (null)
-    simpleField.getAnnotation(classOf[PreDestroy]) should be (null)
+  "Annotation overrides should take priority over proprety defaults" in {
+    simpleBeanSetter.getAnnotation(classOf[PreDestroy]) must not be (null)
+    simpleGetter.getAnnotation(classOf[PreDestroy]) must be (null)
+    simpleField.getAnnotation(classOf[PreDestroy]) must be (null)
   }
 
-  it("Multitarget property defaults should work") {
+  "Multitarget property defaults should work" in {
     val multiField = classOf[SimpleTestBean].getDeclaredField("testMulti")
     val multiSetter = classOf[SimpleTestBean].getMethod("testMulti_$eq", classOf[Int])
     val multiBeanGetter = classOf[SimpleTestBean].getMethod("getTestMulti")
-    multiField.getAnnotation(classOf[PostConstruct]) should be (null)
-    multiSetter.getAnnotation(classOf[PostConstruct]) should not be (null)
-    multiBeanGetter.getAnnotation(classOf[PostConstruct]) should not be (null)
+    multiField.getAnnotation(classOf[PostConstruct]) must be (null)
+    multiSetter.getAnnotation(classOf[PostConstruct]) must not be (null)
+    multiBeanGetter.getAnnotation(classOf[PostConstruct]) must not be (null)
   }
 
   val test1Field = classOf[ClassTestBean].getDeclaredField("test1")
@@ -89,21 +83,21 @@ class Tests extends Spec with ShouldMatchers {
   val test1BeanGetter = classOf[ClassTestBean].getMethod("getTest1")
   val test1BeanSetter = classOf[ClassTestBean].getMethod("setTest1", classOf[Int])
 
-  it("Class defaults should be respected") {
-    test1BeanGetter.getAnnotation(classOf[PostConstruct]) should not be (null)
-    test1BeanSetter.getAnnotation(classOf[PostConstruct]) should not be (null)
-    test1Field.getAnnotation(classOf[PostConstruct]) should be (null)
+  "Class defaults should be respected" in {
+    test1BeanGetter.getAnnotation(classOf[PostConstruct]) must not be (null)
+    test1BeanSetter.getAnnotation(classOf[PostConstruct]) must not be (null)
+    test1Field.getAnnotation(classOf[PostConstruct]) must be (null)
   }
 
-  it("Annotation overrides should take priority over class defaults") {
-    test1Getter.getAnnotation(classOf[Resource]) should not be (null)
-    test1Field.getAnnotation(classOf[Resource]) should be (null)
-    test1BeanGetter.getAnnotation(classOf[Resource]) should be (null)
-    test1BeanSetter.getAnnotation(classOf[Resource]) should be (null)
-    test1Field.getAnnotation(classOf[PreDestroy]) should not be (null)
-    test1Setter.getAnnotation(classOf[PreDestroy]) should not be (null)
-    test1BeanGetter.getAnnotation(classOf[Resource]) should be (null)
-    test1BeanSetter.getAnnotation(classOf[Resource]) should be (null)
+  "Annotation overrides should take priority over class defaults" in {
+    test1Getter.getAnnotation(classOf[Resource]) must not be (null)
+    test1Field.getAnnotation(classOf[Resource]) must be (null)
+    test1BeanGetter.getAnnotation(classOf[Resource]) must be (null)
+    test1BeanSetter.getAnnotation(classOf[Resource]) must be (null)
+    test1Field.getAnnotation(classOf[PreDestroy]) must not be (null)
+    test1Setter.getAnnotation(classOf[PreDestroy]) must not be (null)
+    test1BeanGetter.getAnnotation(classOf[Resource]) must be (null)
+    test1BeanSetter.getAnnotation(classOf[Resource]) must be (null)
   }
 
   val test2Field = classOf[ClassTestBean].getDeclaredField("test2")
@@ -111,23 +105,23 @@ class Tests extends Spec with ShouldMatchers {
   val test2BeanGetter = classOf[ClassTestBean].getMethod("getTest2")
   val test2BeanSetter = classOf[ClassTestBean].getMethod("setTest2", classOf[Int])
 
-  it("Property defaults should take priority over class defaults") {
-    test2Setter.getAnnotation(classOf[PostConstruct]) should not be (null)
-    test2Field.getAnnotation(classOf[PostConstruct]) should be (null)
-    test2BeanGetter.getAnnotation(classOf[PostConstruct]) should be (null)
-    test2BeanSetter.getAnnotation(classOf[PostConstruct]) should be (null)
+  "Property defaults should take priority over class defaults" in {
+    test2Setter.getAnnotation(classOf[PostConstruct]) must not be (null)
+    test2Field.getAnnotation(classOf[PostConstruct]) must be (null)
+    test2BeanGetter.getAnnotation(classOf[PostConstruct]) must be (null)
+    test2BeanSetter.getAnnotation(classOf[PostConstruct]) must be (null)
   }
 
-  it("Annotation overrides should take priority over defaults") {
-    test2Field.getAnnotation(classOf[PreDestroy]) should not be (null)
-    test2Setter.getAnnotation(classOf[PreDestroy]) should be (null)
-    test2BeanGetter.getAnnotation(classOf[PreDestroy]) should be (null)
-    test2BeanSetter.getAnnotation(classOf[PreDestroy]) should be (null)
+  "Annotation overrides should take priority over defaults" in {
+    test2Field.getAnnotation(classOf[PreDestroy]) must not be (null)
+    test2Setter.getAnnotation(classOf[PreDestroy]) must be (null)
+    test2BeanGetter.getAnnotation(classOf[PreDestroy]) must be (null)
+    test2BeanSetter.getAnnotation(classOf[PreDestroy]) must be (null)
   }
 
-  it("Fully qualified targets should be supported") {
-    test2BeanGetter.getAnnotation(classOf[Resources]) should not be (null)
-    test2Field.getAnnotation(classOf[Resources]) should be (null)
-    test2BeanSetter.getAnnotation(classOf[Resources]) should be (null)
+  "Fully qualified targets should be supported" in {
+    test2BeanGetter.getAnnotation(classOf[Resources]) must not be (null)
+    test2Field.getAnnotation(classOf[Resources]) must be (null)
+    test2BeanSetter.getAnnotation(classOf[Resources]) must be (null)
   }
 }
