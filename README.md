@@ -1,6 +1,6 @@
 Beans plugin for the Scala compiler
 ===================================
-Scala 2.8 makes in possible to control annotation placement by marking
+Scala 2.8 makes it possible to control annotation placement by marking
 them with special annotations from the `scala.annotation.target` package.
 But the way you are supposed to do it is rather explicit and verbose.
 This plugin allows one to define per-class and per-property placement
