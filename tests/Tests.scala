@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Mikhail Vorozhtsov
+ * Copyright (C) 2010, 2012 Mikhail Vorozhtsov
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.github.mvv.beans.scalac.test
 import javax.annotation._
 import scala.annotation.target._
 import scala.reflect.BeanProperty
-import org.specs._
+import org.specs2.mutable._
 
 class SimpleTestBean {
   @(BeanProperty @getter)
@@ -49,7 +49,7 @@ class ClassTestBean {
   var test2 = 0
 }
 
-class Tests extends SpecificationWithJUnit {
+class Tests extends Specification {
   val simpleField = classOf[SimpleTestBean].getDeclaredField("test")
   val simpleGetter = classOf[SimpleTestBean].getMethod("test")
   val simpleBeanSetter = classOf[SimpleTestBean].getMethod("setTest", classOf[Int])

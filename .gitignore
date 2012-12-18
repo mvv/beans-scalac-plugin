@@ -1,6 +1,13 @@
 .*
 *.swp
 *~
+project/boot
+lib
+lib_managed
+src_managed
 target
 settings.xml
 nbactions.xml
+*.iml
+*.ipr
+*.iws
