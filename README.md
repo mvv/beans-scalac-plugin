@@ -52,7 +52,7 @@ With the [maven-scala-plugin](http://scala-tools.org/mvnsites/maven-scala-plugin
 	      ...
 	      <compilerPlugin>
 	        <groupId>com.github.mvv.beans-scalac-plugin</groupId>
-	        <artifactId>beans-scalac-plugin</artifactId>
+	        <artifactId>beans-scalac-plugin_YOUR_SCALA_VERSION</artifactId>
 	        <version>0.2</version>
 	      </compilerPlugin>
 	    </compilerPlugins>
